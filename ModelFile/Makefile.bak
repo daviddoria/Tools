@@ -1,0 +1,27 @@
+PROJECTS = ..
+
+INCLUDES = -I$(PROJECTS)/GeometryLibrary -I.
+
+LIBS = -L$(PROJECTS)/GeometryLibrary -lgeom -lstdc++ -L/usr/local/lib -openmp
+
+FILELIST = PtxFile.o VtkFile.o ObjFile.o
+
+COMPILER = icc
+
+FLAGS = -fPIC
+
+ConvertFormat.o: ConvertFormat.cpp ConvertFormat.h $(FILELIST)
+	$(COMPILER) $(INCLUDES) -c $< -o $@ $(LIBS) $(FLAGS)
+
+PtxFile.o: PtxFile.cpp PtxFile.h
+	$(COMPILER) $(INCLUDES) -c $< -o $@ $(LIBS) $(FLAGS)
+
+VtkFile.o: VtkFile.cpp VtkFile.h
+	$(COMPILER) $(INCLUDES) -c $< -o $@ $(LIBS) $(FLAGS)
+
+ObjFile.o: ObjFile.cpp ObjFile.h
+	$(COMPILER) $(INCLUDES) -c $< -o $@ $(LIBS) $(FLAGS)
+
+clean:
+	rm -f *.o
+	rm $(FILELIST)

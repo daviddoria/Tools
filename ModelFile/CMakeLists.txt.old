@@ -1,0 +1,170 @@
+cmake_minimum_required(VERSION 2.6)
+
+PROJECT(ModelFile)
+
+FIND_PACKAGE(VXL REQUIRED)
+INCLUDE(${VXL_CMAKE_DIR}/UseVXL.cmake)
+
+set(PROJECTS /media/portable/Projects/src/)
+
+INCLUDE_DIRECTORIES(${INCLUDE_DIRECTORIES}
+${VXL_RPL_INCLUDE_DIR}
+${VXL_MUL_INCLUDE_DIR}
+${PROJECTS}
+)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp -DGRAPHICS") #g++
+
+set(GeometryDir ${PROJECTS}/VNLGeometry/)
+
+FIND_PACKAGE(VTK REQUIRED)
+INCLUDE(${VTK_USE_FILE})
+
+set(GeometrySources 
+${GeometryDir}/Angles.cpp 
+${GeometryDir}/Color.cpp 
+${GeometryDir}/Ray.cpp 
+${GeometryDir}/Triangle.cpp
+${GeometryDir}/Transformation.cpp
+${GeometryDir}/Geometry.cpp
+)
+
+#################################################
+
+# ADD_EXECUTABLE( Converter Converter.cpp 
+# ModelFile.cpp
+# ${GeometrySources}
+# ${PROJECTS}/VXLHelpers/VXLHelpers.cpp
+# ${PROJECTS}/Tools/Tools.cpp
+# )
+# TARGET_LINK_LIBRARIES(Converter 
+# vtkRendering vtkGraphics vtkHybrid vtkImaging vtkIO  vtkFiltering vtkCommon
+# vgl
+# vnl
+# )
+
+#################################################
+
+# ADD_EXECUTABLE(Combine Combine.cpp
+# ${GeometrySources}
+# ModelFile.cpp
+# ${PROJECTS}/VXLHelpers/VXLHelpers.cpp
+# ${PROJECTS}/Tools/Tools.cpp
+# )
+# 
+# TARGET_LINK_LIBRARIES(Combine
+# vtkRendering vtkGraphics vtkHybrid vtkImaging vtkIO  vtkFiltering vtkCommon
+# vgl
+# vnl
+# vcl
+# rrel
+# )
+
+
+#################################################
+
+# ADD_EXECUTABLE(ExtractPoints ExtractPoints.cpp
+# ${GeometrySources}
+# ModelFile.cpp
+# ${PROJECTS}/VXLHelpers/VXLHelpers.cpp
+# ${PROJECTS}/Tools/Tools.cpp
+# )
+# 
+# TARGET_LINK_LIBRARIES(ExtractPoints
+# vtkRendering vtkGraphics vtkHybrid vtkImaging vtkIO  vtkFiltering vtkCommon
+# vgl
+# vnl
+# vcl
+# rrel
+# )
+
+
+#################################################
+
+# ADD_EXECUTABLE(CleanupModel CleanupModel.cpp
+# ${GeometrySources}
+# ModelFile.cpp
+# ${PROJECTS}/VXLHelpers/VXLHelpers.cpp
+# ${PROJECTS}/Tools/Tools.cpp
+# )
+# 
+# TARGET_LINK_LIBRARIES(CleanupModel
+# vtkRendering vtkGraphics vtkHybrid vtkImaging vtkIO  vtkFiltering vtkCommon
+# vgl
+# vcl
+# vnl
+# rrel
+# )
+
+#################################################
+
+# ADD_EXECUTABLE( Triangulate Triangulate.cpp 
+# ${GeometrySources}
+# ModelFile.cpp
+# ${ProjectsDir}/VXLHelpers/VXLHelpers.cpp
+# )
+# TARGET_LINK_LIBRARIES(Triangulate 
+# vtkRendering vtkGraphics vtkHybrid vtkImaging vtkIO  vtkFiltering vtkCommon
+# vgl
+# vnl
+# )
+
+
+###################################################
+ADD_EXECUTABLE( Test Test.cpp 
+${GeometrySources}
+ModelFile.cpp
+${PROJECTS}/VXLHelpers/VXLHelpers.cpp
+${PROJECTS}/Tools/Tools.cpp
+)
+
+TARGET_LINK_LIBRARIES(Test
+vtkRendering vtkGraphics vtkHybrid vtkImaging vtkIO  vtkFiltering vtkCommon
+vgl
+vnl
+vcl
+rrel
+)
+
+###################################################
+
+# ADD_EXECUTABLE(TransformModel TransformModel.cpp
+# ${GeometrySources}
+# ${PROJECTS}/VXLHelpers/VXLHelpers.cpp
+# ${PROJECTS}/Tools/Tools.cpp
+# ModelFile.cpp
+# )
+# 
+# TARGET_LINK_LIBRARIES(TransformModel
+# gomp
+# vnl
+# vgl
+# vcl
+# vul
+# rrel
+# glut GLU GL Xmu X11
+# vtkHybrid #for delunay triangulation
+# SDL SDL_image
+# )
+
+
+###################################################
+
+# ADD_EXECUTABLE(CenterModel CenterModel.cpp
+# ${GeometrySources}
+# ${PROJECTS}/VXLHelpers/VXLHelpers.cpp
+# ${PROJECTS}/Tools/Tools.cpp
+# ModelFile.cpp
+# )
+# 
+# TARGET_LINK_LIBRARIES(CenterModel
+# gomp
+# vnl
+# vgl
+# vcl
+# vul
+# rrel
+# glut GLU GL Xmu X11
+# vtkHybrid #for delunay triangulation
+# SDL SDL_image
+# )
